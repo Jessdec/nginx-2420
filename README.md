@@ -29,3 +29,19 @@ sudo pacman -S nginx
 ```
 
 Well done! If you were successfully able to install the prequsites you are now able to begin the Nginx configuration.
+
+# Nginx configuration
+Now, that we have Nginx installed we need to configure it to meet our needs.
+
+## Starting and Enabling Nginx
+We now must start and enable Nginx for it to actually work. Begin by starting it then enabling it with the following commands.
+```
+sudo systemctl start nginx
+sudo systemctl enable nginx
+```
+These commands should've started and enabled nginx and we can test this by inputting the following command:
+```
+sudo systemctl status nginx
+```
+This should output Nginx's status, please refer to the "NginxStatus" image as a reference.
+
