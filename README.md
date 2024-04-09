@@ -102,8 +102,42 @@ http {
     include /etc/nginx/conf.d/*.conf;
     include /etc/nginx/sites-enabled/*;
 }
+
 ```
 Press ESC to exit insert mode, and now save and quit by typing:
 ```
 :wq
+```
+
+## Creating Folders for Enabling/Disabling Website
+Navigate to Nginx within the etc directory:
+```
+cd /etc/nginx
+```
+Create two new folders within Nginx:
+```
+sudo mkdir sites-enabled
+sudo mldir sites-disabled 
+```
+
+Navigate into each file and repeat this process for each of them
+```
+cd sites-enabled or sites-disabled
+sudo vim nginx-2420 
+```
+Copy and paste this into each of the new files:
+```
+server {
+    listen 80;
+    listen [::]:80;
+    server_name _;
+    root /srv/2420-files;
+    location / {
+        autoindex on;
+    }
+}
+```
+Save and exit back to the console. To test if this has been done successfully, input the following command:
+```
+sudo nginx -t
 ```
