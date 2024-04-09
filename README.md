@@ -58,3 +58,52 @@ Navigate into the newly created folder:
 ```
 cd /srv/2420-files
 ```
+## Edit the Nginx Config
+Navigate to the nginx.conf file location and open the nginx.conf:
+```
+cd /etc/nginx/
+sudo vim nginx.conf
+```
+While in ESC mode once you are inside the config, remove all the lines of code inside by typing and entering the following:
+```
+d300
+```
+This deletes 300 lines. You may change this number to work for the amount you need to remove.
+Now enter insert mode by pressing the 'i' key and copy and paste the following in:
+```
+user http;
+worker_processes auto;
+worker_cpu_affinity auto;
+
+events {
+    multi_accept on;
+    worker_connections 1024;
+}
+
+http {
+    charset utf-8;
+    sendfile on;
+    tcp_nopush on;
+    tcp_nodelay on;
+    server_tokens off;
+    log_not_found off;
+    types_hash_max_size 4096;
+    client_max_body_size 16M;
+
+    # MIME
+    include mime.types;
+    default_type application/octet-stream;
+
+    # logging
+    access_log /var/log/nginx/access.log;
+    error_log /var/log/nginx/error.log warn;
+
+    # load configs
+    include /etc/nginx/conf.d/*.conf;
+    include /etc/nginx/sites-enabled/*;
+}
+```
+Press ESC to exit insert mode, and now save and quit by typing:
+```
+:wq
+```
